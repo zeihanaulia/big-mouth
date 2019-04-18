@@ -24,6 +24,8 @@ functions:
       - http:
           path: /
           method: get
+    environment:
+      restaurant_api: https://372eb29q6j.execute-api.ap-southeast-1.amazonaws.com/dev/restaurants
 
   get-restaurants:
     handler: functions/get-restaurants.handler
