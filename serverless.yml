@@ -28,7 +28,9 @@ functions:
           path: /
           method: get
     environment:
-      restaurant_api: https://372eb29q6j.execute-api.ap-southeast-1.amazonaws.com/dev/restaurants
+      restaurant_api: https://v62cwmk2rg.execute-api.ap-southeast-1.amazonaws.com/dev/restaurants
+      cognito_user_pool_id: {cognito_user_pool_id}
+      cognito_client_id: {cognito_user_pool_id}
 
   get-restaurants:
     handler: functions/get-restaurants.handler
@@ -38,6 +40,16 @@ functions:
           method: get
           authorizer: aws_iam
     environment:
+      restaurants_table: restaurants
+
+  search-restaurants:
+    handler: functions/search-restaurants.handler
+    events:
+      - http:
+          path: /restaurants/search/
+          method: post
+          authorizer: arn:aws:cognito-idp:ap-southeast-1:647709804557:userpool/ap-southeast-1_vhHY9CYJg
+    environment: 
       restaurants_table: restaurants
 
 resources:
@@ -55,3 +67,7 @@ resources:
         ProvisionedThroughput: 
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+
+package:
+  exclude:
+    - docs/**
