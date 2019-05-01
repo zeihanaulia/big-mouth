@@ -48,7 +48,7 @@ functions:
       - http:
           path: /restaurants/search/
           method: post
-          authorizer: arn:aws:cognito-idp:ap-southeast-1:647709804557:userpool/ap-southeast-1_vhHY9CYJg
+          authorizer: {arn:cognito}
     environment: 
       restaurants_table: restaurants
 
